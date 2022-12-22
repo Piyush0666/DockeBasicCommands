@@ -1,0 +1,112 @@
+docker push developmentoperation/001:0.0.6.RELEASE
+docker --version
+docker run -p 5000:5000 in28min/hello-world-python:0.0.1.RELEASE
+docker run -p 5000:5000 in28min/hello-world-java:0.0.1.RELEASE
+docker run -p 5000:5000 in28min/hello-world-nodejs:0.0.1.RELEASE
+docker run -d -p 5000:5000 in28min/hello-world-nodejs:0.0.1.RELEASE//So when we want to run the docker image in detech model.So we are using -d.
+docker run -d -p 5001:5000 in28min/hello-world-python:0.0.1.RELEASE
+docker logs 04e52ff9270f5810eefe1f77222852dc1461c22440d4ecd6228b5c38f09d838e
+docker logs c2ba//From this command we can see docker logs and c2ba means that this is the specific id.
+docker images
+docker container ls//ti will show only running container
+docker container ls -a //This will show all the container which are present in Dock container.
+docker container stop f708b7ee1a8b //the container which we want to stop we just need to write the container ID.
+docker run -d -p 5001:8080 in28min/hello-world-rest-api:0.0.1.RELEASE
+docker pull mysql //we are pulling mysql libery and in this here we have not passed any tag so it will automitically download latest tag.(Using default tag: latest)
+docker search mysql
+docker search // it will search the image which want to search we just need to rend the slecific name eg:java,.net,mysql etc.
+docker image history in28min/hello-world-java:0.0.1.RELEASE //from this command we can check the history of the  Image
+docker image history 100229ba687e//will give history of the layers which are present.
+docker image inspect 100229ba687e // will give you behind the screen for that specific image.
+docker image remove mysql //remove image for specfic image id //
+docker image remove in28min/hello-world-java:0.0.1.RELEASE
+docker container rm 3e657ae9bd16
+docker container ls -a //it will show all the  total container weather the are running or not
+docker container pause 832//it will pause the container.
+docker container unpause 832//it will unpause the container.
+docker container stop 832//it will stop the container // it will give some time to shutdown the application
+docker container inspect 67ec8899ecba //it will inspect
+docker container kill 67ec8899ecba// It will stop the application instent
+docker container prune // prune       Remove unused data
+docker system
+docker system df //df
+TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
+Images          4         3         750.2MB   538MB (71%)
+Containers      3         2         33.86kB   0B (0%)
+Local Volumes   1         1         12.77MB   0B (0%)
+Build Cache     34        0         212.9MB   212.9MBShow docker disk usage
+docker system info //Display system-wide information
+docker system prune -a
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all images without at least one container associated to them
+  - all build cache
+
+Are you sure you want to continue? [y/N]
+
+docker top 67ec8899ecba
+docker stats 9009722eac4d
+docker container run -p 5000:5000 -d -m 512m in28min/hello-world-java:0.0.1.RELEASE // It says that we need on 512mb space for the particular image
+docker container run -p 5000:5000 -d -m 512m --cpu-quota=50000  in28min/hello-world-java:0.0.1.RELEASE//cpu-quota=50000 this says it will take cpu-quota=50000 cpu space
+docker system events //what are the activy we are doing it will calculate thatentry and show
+
+docker container stats 4faca1ea914e3e4587d1d790948ec6cb8fa34f26e900c12632fd64d4722fd59a
+docker stats 42f170966ce613d2a16d7404495af7b3295e01aeb9142e1fa1762bbdc581f502
+
+cd /in28Minutes/git/devops-master-class/projects/hello-world/hello-world-python
+docker build -t in28min/hello-world-python:0.0.2.RELEASE .
+docker run -p 5000:5000 -d in28min/hello-world-python:0.0.2.RELEASE
+docker history e66dc383f7a0
+docker push in28min/hello-world-python:0.0.2.RELEASE
+
+cd ../hello-world-nodejs/
+docker build -t in28min/hello-world-nodejs:0.0.2.RELEASE .
+docker container run -d -p 5000:5000 in28min/hello-world-nodejs:0.0.2.RELEASE
+docker push in28min/hello-world-nodejs:0.0.2.RELEASE
+
+cd ../hello-world-java/
+docker build -t in28min/hello-world-java:0.0.2.RELEASE .
+docker run -d -p 5000:5000 in28min/hello-world-java:0.0.2.RELEASE
+docker push in28min/hello-world-java:0.0.2.RELEASE
+
+docker run -d -p 5001:5000 in28min/hello-world-nodejs:0.0.3.RELEASE ping google.com
+
+
+docker run -d -p 8000:8000 --name=currency-exchange in28min/currency-exchange:0.0.1-RELEASE
+docker run -d -p 8100:8100 --name=currency-conversion in28min/currency-conversion:0.0.1-RELEASE
+
+docker network ls
+docker network inspect bridge
+
+docker run -d -p 8100:8100 --env CURRENCY_EXCHANGE_SERVICE_HOST=http://currency-exchange --name=currency-conversion --link currency-exchange in28min/currency-conversion:0.0.1-RELEASE
+
+docker network create currency-network
+docker container stop currency-exchange
+docker container stop currency-conversion
+docker run -d -p 8000:8000 --name=currency-exchange --network=currency-network in28min/currency-exchange:0.0.1-RELEASE
+docker run -d -p 8100:8100 --env CURRENCY_EXCHANGE_SERVICE_HOST=http://currency-exchange --name=currency-conversion --network=currency-network in28min/currency-conversion:0.0.1-RELEASE
+
+docker-compose --version
+cd ../../microservices/
+docker-compose up
+docker-compose up -d
+docker container ls
+docker network ls
+docker network inspect microservices_currency-compose-network
+docker-compose down
+docker container ls -a
+docker system prune -a
+docker-compose config
+docker-compose images
+docker-compose ps
+docker-compose top
+
+docker build -t in28min/hello-world-java:0.0.1.RELEASE .
+docker push in28min/hello-world-java:0.0.1.RELEASE
+
+docker build -t in28min/hello-world-python:0.0.1.RELEASE .
+docker push in28min/hello-world-python:0.0.1.RELEASE
+
+docker build -t in28min/hello-world-nodejs:0.0.1.RELEASE .
+docker push in28min/hello-world-nodejs:0.0.1.RELEASE
